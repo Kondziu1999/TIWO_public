@@ -1,0 +1,60 @@
+<ng-container *ngIf="!(error$ | async) else error">
+  <div class="wrapper" *ngIf="editedElement !== undefined else error">
+    <h2>List {{editedElement.name}}</h2>
+    <h3>Elements ({{editedElement!.items.length}}):</h3>
+
+
+    <app-shopping-list-item
+      *ngFor="let item of editedElement!.items" [item]="item" [realized]="editedElement.realized"
+      [id]="'list-item' + item.id"
+      (editItem)="editItem($event)"
+      (deleteItem)="deleteItem($event)">
+    </app-shopping-list-item>
+    
+    <div style="display: flex;">
+      <button id="markAsRealized" *ngIf="!editedElement.realized" mat-raised-button color="accent" 
+        (click)="markAsRealized()"
+        [disabled]="editedElement.items.length === 0">
+        Mark as realized
+      </button>
+
+      <span class="horizontal-spacer"></span>
+
+      <button id="deleteList" mat-raised-button color="warn" (click)="deleteList()">
+        Delete list
+      </button>
+    </div>
+
+    <br>
+    
+    <ng-container *ngIf="!editedElement.realized">
+      <button id="addListItem" color="accent" mat-raised-button 
+        *ngIf="!creatorModeOpened else creator" 
+        (click)="creatorModeOpened = true">
+        <mat-icon>add</mat-icon>
+        Add item
+      </button>
+      
+      <ng-template #creator>
+        <div style="width: 600px;">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Suggested items: </mat-label>
+            <mat-select id="defaultWeightsSelect" [formControl]="preselectedName">
+              <mat-option *ngFor="let x of defaultItems" [value]="x">{{x}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <app-shopping-list-item-creator 
+            [preselectedName]="preselectedName.value" 
+            (canceled)="creatorModeOpened = false"
+            (selected)="onItemAdd($event)">
+          </app-shopping-list-item-creator>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #error>
+    Specified list not found
+</ng-template>

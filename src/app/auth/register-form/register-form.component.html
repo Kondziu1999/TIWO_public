@@ -1,0 +1,45 @@
+<form  class="form-container" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email"
+            placeholder="Ex. pat@example.com" id="email">
+        <mat-error id="invalidEmailMessage"  *ngIf="email.hasError('email') && !email.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+  </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput formControlName="username"
+            placeholder="johnDoe123" id="username">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input 
+            type="password" matInput formControlName="password" id="password"
+            >
+            <mat-hint id="strongPasswordHint">
+                Must contain at least 5 characters and one special sign
+            </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Confirm password</mat-label>
+        <input 
+            type="password" matInput 
+            formControlName="confirmPassword" 
+            id="confirmPassword">
+        <mat-error id="passwordsMismatchMessage" *ngIf="registrationForm.hasError('mismatch')">
+            Passwords must be the same
+        </mat-error>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <div class="spacer"></div>
+    
+    <div class="action-container">
+        <button id="registerBtn" mat-raised-button color="accent" type="submit" [disabled]="registrationForm.invalid">Register</button>
+    </div>
+</form>

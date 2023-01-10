@@ -1,0 +1,46 @@
+<form  class="form-container" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input id="itemName" matInput formControlName="name">
+        <mat-error id="itemNameErrorMessage" *ngIf="nameControl.hasError('required') || nameControl.hasError('maxlength')">
+            Name can have max from one to 40 chars
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>quantity</mat-label>
+        <input id="itemQuantity" matInput type="number" formControlName="quantity"
+            placeholder="1">
+        
+        <mat-error id="itemQuantityErrorMessage" *ngIf="quantityControl.hasError('required') || quantityControl.hasError('min')">
+            Quantity cannot be negative or equal 0
+        </mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Basic weight</mat-label>
+        <mat-select id="itemWeight" formControlName="basicWeight">
+          <mat-option *ngFor="let x of basicWeights" [value]="x">{{x}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    
+
+    <button color="accent" style="width: fit-content;" type="button" mat-raised-button (click)="fileInput.click()">
+      <mat-icon>upload</mat-icon>  
+      upload File
+    </button>
+    
+    <input id="itemFile" style="width: 1px; height: 1px;margin: 5px;" (change)="onFileSelected($event)" #fileInput type="file">
+    <span class="file-name">Chosen reference image: {{imageControl.value?.name ?? "-"}}</span>
+
+    <br>
+    <div class="actions">
+      <button id="itemAddCancel" mat-raised-button (click)="canceled.emit()">cancel</button>
+      <span class="horizontal-spacer"></span>
+      <button id="confirmItemAdd" mat-raised-button color="accent" type="submit" [disabled]="form.invalid">Add</button>
+    </div>
+
+</form>

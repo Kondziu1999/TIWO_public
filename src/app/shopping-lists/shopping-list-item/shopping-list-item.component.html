@@ -1,0 +1,21 @@
+
+<img *ngIf="imageUrl$ && imageUrl$ | async as imageUrl else placeholder" [src]="imageUrl">
+
+<ng-template #placeholder>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg"/>
+</ng-template>
+
+<span quantity>{{item.quantity}}</span>
+<span weight>{{item.basicWeight}}</span>
+<span name>{{item.name}}</span>
+
+<span class="horizontal-spacer"></span>
+<ng-container *ngIf="!realized">
+  <!-- <button mat-icon-button [id]="'edit-item-' + item.id">
+    <mat-icon color="accent" (click)="editItem.emit(item)">edit</mat-icon>
+  </button> -->
+
+  <button mat-icon-button [id]="'delete-item-' + item.id">
+    <mat-icon color="warn" (click)="deleteItem.emit(item)">delete</mat-icon>
+  </button>
+</ng-container>

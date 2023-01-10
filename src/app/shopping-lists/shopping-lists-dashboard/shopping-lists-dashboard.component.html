@@ -1,0 +1,19 @@
+<div class="list"> 
+  <h3>Shopping lists:</h3>
+  
+  <div [routerLink]="['./editor', item.id]"  class="item" *ngFor="let item of lists$ | async;let i=index" id="{{'listItem-' + i}}">
+    <span>{{item.name}}</span>
+    <span class="spacer"></span>
+    <span>Items: {{item.items.length}}</span>
+    <span class="spacer"></span>
+    <span>realizationAt: {{item.realizationDate | date:'mediumDate'}}</span>
+    <hr *ngIf="item.realized">
+  </div>
+</div>
+
+<br>
+<button color="accent" mat-raised-button (click)="addList()" id="addListBtn">
+  <mat-icon>
+    add list
+  </mat-icon>
+</button>

@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.vertical-filler {
+  flex-grow: 1;
+}
+
+.horizontal-spacer {
+  flex-grow: 1;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cursor-on-hover {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.flex-center-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-form {
+  margin: auto;
+  width: 500px;
+  box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.2);
+
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+
+  .action-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

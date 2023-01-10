@@ -1,0 +1,15 @@
+<div class="wrapper-container auth-form">
+    <nav mat-tab-nav-bar backgroundColor="accent">
+        <a mat-tab-link 
+            *ngFor="let link of authlinks"
+            (click)="changeLink(link)"
+            [active]="activeLink == link"
+            [routerLink]="link"> 
+            {{link}} 
+        </a>
+    </nav>
+
+    <div class="spacer"></div>
+
+    <router-outlet></router-outlet>
+</div>
